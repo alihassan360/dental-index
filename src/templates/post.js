@@ -2,15 +2,25 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import PostIcons from "../components/PostIcons"
 import Img from "gatsby-image"
+import Helmet from "react-helmet";
 
+import config from "../data/SiteConfig";
 import { rhythm } from "../utils/typography"
 
 class PostTemplate extends Component {
   render() {
     const post = this.props.data.wordpressPost
+    const { slug } = this.props.pathContext;
+    if (!post.id) {
+      post.id = slug;
+    }
 
     return (
       <div>
+        <Helmet>
+          <title>{`${post.title} - ${config.siteTitle}`}</title>
+          <link rel="canonical" href={`${config.siteUrl}${post.id}`} />
+        </Helmet>
         <Img sizes={post.featured_media.localFile.childImageSharp.sizes} />
         <h1 dangerouslySetInnerHTML={{ __html: post.title }} />
         <PostIcons node={post} css={{ marginBottom: rhythm(1 / 2) }} />

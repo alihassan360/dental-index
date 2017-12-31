@@ -5,7 +5,9 @@ import ClockIcon from "react-icons/lib/fa/clock-o"
 import TagIcon from "react-icons/lib/fa/tag"
 import OpenIcon from "react-icons/lib/fa/folder-open"
 import Img from "gatsby-image";
+import Helmet from "react-helmet";
 
+import config from "../data/SiteConfig";
 import PostIcons from "../components/PostIcons"
 
 import { rhythm } from "../utils/typography"
@@ -17,6 +19,10 @@ class Home extends Component {
 
     return (
       <div>
+        <Helmet>
+          <title>{config.siteTitle}</title>
+          <link rel="canonical" href={`${config.siteUrl}`} />
+        </Helmet>
         <div css={{ marginBottom: rhythm(1) }}>
           <h1>Pages</h1>
           {data.allWordpressPage.edges.map(({ node }) => (
