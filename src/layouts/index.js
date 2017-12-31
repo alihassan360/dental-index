@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import Link from "gatsby-link"
 
 import { rhythm, scale } from "../utils/typography"
+import config from "../data/SiteConfig"
 
 const containerStyle = {
   maxWidth: 700,
@@ -16,11 +17,12 @@ class DefaultLayout extends React.Component {
       <div>
         <div
           css={{
-            background: `rgb(207, 58, 62)`,
+            background: `rgb(255,255,255)`,
             marginBottom: rhythm(1),
             padding: `${rhythm(1)} 0px`,
+            border: `1px solid rgb(240,240,240)`,
             "@media screen and (min-width: 500px)": {
-              padding: `${rhythm(2)} 0px`,
+              padding: `${rhythm(1)} 0px`,
             },
           }}
         >
@@ -29,6 +31,7 @@ class DefaultLayout extends React.Component {
               css={{
                 margin: 0,
                 fontSize: scale(1.5).fontSize,
+                textAlign: `center`,
                 lineHeight: 1,
                 "@media screen and (min-width: 500px)": {
                   fontSize: scale(1.9).fontSize,
@@ -36,6 +39,11 @@ class DefaultLayout extends React.Component {
                 },
               }}
             >
+              <span
+                css={{
+                  display: `none`,
+                }}
+              >Casemasters Blog</span>
               <Link
                 css={{
                   color: `rgb(224,203,144)`,
@@ -46,7 +54,13 @@ class DefaultLayout extends React.Component {
                 }}
                 to="/"
               >
-                Gatsby + Wordpress!!
+                <img
+                  css={{
+                    width: `70px`,
+                    margin: `0 auto`,
+                  }}
+                  src={config.siteLogo} alt="Casemasters" 
+                />
               </Link>
             </h1>
           </div>
