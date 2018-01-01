@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import PostIcons from "../components/PostIcons"
 import Img from "gatsby-image"
 import Helmet from "react-helmet";
+import { css } from "glamor";
 
 import config from "../data/SiteConfig";
 import { rhythm } from "../utils/typography"
@@ -16,12 +17,15 @@ class PostTemplate extends Component {
     }
 
     return (
-      <div>
+      <div css={{ position: `relative` }}>
         <Helmet>
           <title>{`${post.title} - ${config.siteTitle}`}</title>
           <link rel="canonical" href={`${config.siteUrl}${post.id}`} />
         </Helmet>
-        <Img sizes={post.featured_media.localFile.childImageSharp.sizes} />
+        
+        <Img css={{ height: `60vh` }} sizes={post.featured_media.localFile.childImageSharp.sizes}/>
+        <div css={{ background: `linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1) 95%)`, width: `100%`, height: `60vh`, position: `absolute`, top: 0, left: 0 }}></div>
+      
         <h1 dangerouslySetInnerHTML={{ __html: post.title }} />
         <PostIcons node={post} css={{ marginBottom: rhythm(1 / 2) }} />
         <div dangerouslySetInnerHTML={{ __html: post.content }} />

@@ -8,10 +8,6 @@ import config from "../data/SiteConfig"
 
 const containerStyle = {
   margin: `0 auto`,
-  padding: rhythm(3 / 4),
-  "@media screen and (min-width: 750px)": {
-    maxWidth: 800,
-  },
 }
 
 class DefaultLayout extends React.Component {

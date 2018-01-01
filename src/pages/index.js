@@ -14,6 +14,14 @@ import PostIcons from "../components/PostIcons"
 import { rhythm } from "../utils/typography"
 
 let card = css({
+  margin: `0 auto`,
+
+  "@media screen and (min-width: 750px)": {
+    maxWidth: 800,
+  },
+  "@media screen and (min-width: 1281px)": {
+    maxWidth: 1280,
+  },
   '& .date-field': {
     display: `none !important`
   },
@@ -31,6 +39,7 @@ class Home extends Component {
         css={{
           display: `flex`,
           flexWrap: `wrap`,
+          padding: rhythm(3 / 4)
         }}
         {...card}
       >
@@ -57,6 +66,10 @@ class Home extends Component {
                   boxShadow: `0px 2px 15px rgb(220,220,220)`,
                   transition: `all 0.5s ease`
                 },
+              },
+              "@media screen and (min-width: 1281px)": {
+                maxWidth: `calc(33.33% - ${rhythm(2)})`,
+                width: `calc(33.33% - ${rhythm(2)})`,
               }
             }} 
             key={node.slug}
