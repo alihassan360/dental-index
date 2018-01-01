@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import PostIcons from "../components/PostIcons"
 import Helmet from "react-helmet";
 
 import config from "../data/SiteConfig";
@@ -24,7 +23,6 @@ class PageTemplate extends Component {
           <link rel="canonical" href={`${config.siteUrl}${page.id}`} />
         </Helmet>
         <h1 dangerouslySetInnerHTML={{ __html: currentPage.title }} />
-        <PostIcons node={currentPage} css={{ marginBottom: rhythm(1 / 2) }} />
         <div dangerouslySetInnerHTML={{ __html: currentPage.content }} />
       </div>
     )
