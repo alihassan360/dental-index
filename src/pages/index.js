@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import Link from "gatsby-link"
-import ClockIcon from "react-icons/lib/fa/clock-o"
-import TagIcon from "react-icons/lib/fa/tag"
-import OpenIcon from "react-icons/lib/fa/folder-open"
+import ClockIcon from "react-icons/lib/md/access-time"
+import TagIcon from "react-icons/lib/md/label"
+import OpenIcon from "react-icons/lib/md/folder"
 import Img from "gatsby-image";
 import Helmet from "react-helmet";
 import { css } from "glamor";
