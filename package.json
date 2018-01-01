@@ -1,5 +1,5 @@
 {
-  "name": "Casemasters Blog",
+  "name": "CasemastersBlog",
   "private": true,
   "description": "Casemasters blog is based on GatsbyJS and Wordpress.com' API",
   "version": "1.0.0-beta",

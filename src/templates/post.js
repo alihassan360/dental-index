@@ -83,7 +83,7 @@ export const pageQuery = graphql`
         localFile {
           childImageSharp {
             sizes(
-              maxWidth: 450
+              maxWidth: 800
               quality: 90
             ) {
               ...GatsbyImageSharpSizes_withWebp_noBase64

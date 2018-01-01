@@ -7,9 +7,11 @@ import { rhythm, scale } from "../utils/typography"
 import config from "../data/SiteConfig"
 
 const containerStyle = {
-  maxWidth: 700,
   margin: `0 auto`,
   padding: rhythm(3 / 4),
+  "@media screen and (min-width: 750px)": {
+    maxWidth: 800,
+  },
 }
 
 class DefaultLayout extends React.Component {
@@ -39,7 +41,7 @@ export const pageQuery = graphql`
           id
           title
           slug
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "MMM DD, YYYY")
         }
       }
     }

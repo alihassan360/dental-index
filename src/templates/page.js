@@ -38,7 +38,7 @@ export const pageQuery = graphql`
     wordpressPage(id: { eq: $id }) {
       title
       content
-      date(formatString: "MMMM DD, YYYY")
+      date(formatString: "MMM DD, YYYY")
     }
     site {
       id

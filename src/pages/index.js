@@ -17,20 +17,32 @@ class Home extends Component {
     const data = this.props.data
 
     return (
-      <div>
+      <div
+        css={{
+          display: `flex`,
+          flexWrap: `wrap`,
+        }}
+      >
         <Helmet>
           <title>{config.siteTitle}</title>
           <link rel="canonical" href={`${config.siteUrl}`} />
         </Helmet>
 
         {data.allWordpressPost.edges.map(({ node }) => (
-          <div css={{ marginBottom: rhythm(2) }} key={node.slug}>
+          <div 
+            css={{
+              margin: rhythm(1),
+              maxWidth: 333,
+              width: 333
+            }} 
+            key={node.slug}
+          >
             <Link to={node.slug} css={{ textDecoration: `none` }}>
               <Img sizes={node.featured_media.localFile.childImageSharp.sizes} />
               <h3>{node.title}</h3>
             </Link>
             <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-            <PostIcons node={node} />
+            <PostIcons css={{ display: `flex`, flexWrap: `wrap` }} node={node} />
           </div>
         ))}
       </div>
@@ -47,12 +59,13 @@ export const pageQuery = graphql`
       edges {
         node {
           title
+          date(formatString: "MMM DD, YYYY")
           excerpt
           featured_media {
             localFile {
               childImageSharp {
                 sizes(
-                  maxWidth: 450
+                  maxWidth: 350
                   quality: 90
                 ) {
                   ...GatsbyImageSharpSizes_withWebp_noBase64

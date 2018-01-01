@@ -17,7 +17,6 @@ class Header extends Component {
         return (
             <header
                 css={{
-                    marginBottom: rhythm(1),
                     borderBottom: `1px solid rgb(240,240,240)`,
                     textAlign: `center`,
                 }}
@@ -47,25 +46,21 @@ class Header extends Component {
                         >
                         <span
                             css={{
-                            display: `none`,
+                                display: `none`,
                             }}
                         >Casemasters Blog</span>
                         <Link
                             css={{
-                            color: `rgb(224,203,144)`,
-                            ":hover": {
-                                color: `rgb(224,203,144)`,
-                                textDecoration: `none`,
-                            },
+                                color: `rgb(224,203,144)`
                             }}
                             to="/"
                         >
                             <img
-                            css={{
-                                width: `70px`,
-                                margin: `0 auto`,
-                            }}
-                            src={config.siteLogo} alt="Casemasters" 
+                                css={{
+                                    width: `70px`,
+                                    margin: `0 auto`,
+                                }}
+                                src={config.siteLogo} alt="Casemasters" 
                             />
                         </Link>
                         </h1>
@@ -73,11 +68,41 @@ class Header extends Component {
                 </div>
                 <div css={{ padding: `${rhythm(0.5)} 0px`, display: `flex`, justifyContent: `center` }}>
                     <div css={{ marginRight: rhythm(1), ':last-child': {marginRight: 0} }}>
-                        <Link to="/" css={{ textDecoration: `none`, color: `rgb(133,133,133)` }}>Home</Link>
+                        <Link 
+                            to="/" 
+                            css={{
+                                textDecoration: `none`, 
+                                color: `rgb(133,133,133)`,
+                                "@media screen and (min-width: 500px)": {
+                                    ":hover": {
+                                        color: `rgb(35, 148, 184)`,
+                                        textDecoration: `none`,
+                                        borderBottom: `2px solid rgb(35, 148, 184)`,
+                                        padding: `${rhythm(0.55)} 0px`,
+                                    },
+                                }
+                            }}
+                        >
+                        Home
+                    </Link>
                     </div>
                     {data.allWordpressPage.edges.map(({ node }) => (
                         <div css={{ marginRight: rhythm(1), ':last-child': {marginRight: 0} }} key={node.slug}>
-                            <Link to={node.slug} css={{ textDecoration: `none`, color: `rgb(133,133,133)` }}>
+                            <Link 
+                                to={node.slug}
+                                css={{ 
+                                    textDecoration: `none`, 
+                                    color: `rgb(133,133,133)`,
+                                    "@media screen and (min-width: 750px)": {
+                                        ":hover": {
+                                            color: `rgb(35, 148, 184)`,
+                                            textDecoration: `none`,
+                                            borderBottom: `2px solid rgb(35, 148, 184)`,
+                                            padding: `${rhythm(0.55)} 0px`,
+                                        },
+                                    }
+                                }}
+                            >
                                 {node.title}
                             </Link>
                         </div>
