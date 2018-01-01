@@ -46,11 +46,11 @@ class Home extends Component {
               borderRadius: `4px`,
               boxShadow: `0 1px 4px rgb(240,240,240)`,
               margin: rhythm(1),
-              maxWidth: 333,
-              width: 333,
               transition: `all 0.2s ease`,
               position: `relative`,
               "@media screen and (min-width: 500px)": {
+                maxWidth: `calc(50% - ${rhythm(2)})`,
+                width: `calc(50% - ${rhythm(2)})`,
                 ":hover": {
                   boxShadow: `0px 2px 15px rgb(220,220,220)`,
                   transition: `all 0.5s ease`
