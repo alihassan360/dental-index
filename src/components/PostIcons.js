@@ -8,22 +8,49 @@ import { rhythm } from "../utils/typography"
 
 export default ({ node, className = `` }) => (
   <div css={{ marginTop: rhythm(-1 / 2) }} className={className}>
-    <span style={{ marginRight: rhythm(1) }}>
-      <PersonIcon size={14} style={{ position: `relative`, bottom: 1 }} />
+    <span style={{ marginRight: rhythm(0.5), marginBottom: rhythm(0.5), border: `1px solid rgb(240,240,240)`, borderRadius: `50px`, padding: `0 3px`, display: `inline-flex`, alignItems: `center` }}>
+      <PersonIcon 
+        size={18} 
+        style={{ 
+          position: `relative`, 
+          borderRadius: `50px`, 
+          backgroundColor: `rgb(133,133,133)`, 
+          padding: `2px`,
+          fill: `rgb(255,255,255)` 
+        }} 
+      />
       {` `}
-      {node.author.name}
+      <span css={{ fontSize: `12px`, color: `rgb(133,133,133)`, padding: `0 4px` }}>{node.author.name}</span>
     </span>
-    <span style={{ marginRight: rhythm(1) }}>
-      <ClockIcon size={14} style={{ position: `relative`, bottom: 1 }} />
+    <span style={{ marginRight: rhythm(0.5), marginBottom: rhythm(0.5), border: `1px solid rgb(240,240,240)`, borderRadius: `50px`, padding: `0 3px`, display: `inline-flex`, alignItems: `center` }} className="date-field">
+      <ClockIcon 
+        size={18} 
+        style={{
+          position: `relative`,
+          borderRadius: `50px`, 
+          backgroundColor: `rgb(133,133,133)`, 
+          padding: `2px`,
+          fill: `rgb(255,255,255)`  
+        }} 
+      />
       {` `}
-      {node.date}
+      <span css={{ fontSize: `12px`, color: `rgb(133,133,133)`, padding: `0 4px` }}>{node.date}</span>
     </span>
     {node.categories &&
       node.categories.map(category => (
-        <span style={{ marginRight: rhythm(1) }} key={category.name}>
-          <OpenIcon size={14} style={{ position: `relative`, bottom: 1 }} />
+        <span className="category-field" style={{ marginRight: rhythm(0.5), border: `1px solid rgb(240,240,240)`, borderRadius: `50px`, padding: `0 3px`, display: `inline-flex`, alignItems: `center` }} key={category.name}>
+          <OpenIcon 
+            size={18}
+            style={{ 
+              position: `relative`,
+              borderRadius: `50px`, 
+              backgroundColor: `rgb(133,133,133)`, 
+              padding: `3px`,
+              fill: `rgb(255,255,255)`
+          }} 
+        />
           {` `}
-          {category.name}
+          <span css={{ fontSize: `12px`, color: `rgb(133,133,133)`, padding: `0 4px` }}>{category.name}</span>
         </span>
       ))}
     {/* {node.tags &&
