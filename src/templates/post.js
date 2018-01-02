@@ -8,6 +8,17 @@ import { css } from "glamor";
 import config from "../data/SiteConfig";
 import { rhythm } from "../utils/typography"
 
+let boxedContent = css({
+  maxWidth: 650,
+  margin: `2em auto`,
+  position: `relative`,
+  padding: `0 1em`,
+  '& img': {
+    width: `100%`,
+    objectFit: `cover`
+  },
+})
+
 class PostTemplate extends Component {
   render() {
     const post = this.props.data.wordpressPost
@@ -26,9 +37,11 @@ class PostTemplate extends Component {
         <Img css={{ height: `60vh` }} sizes={post.featured_media.localFile.childImageSharp.sizes}/>
         <div css={{ background: `linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1) 95%)`, width: `100%`, height: `60vh`, position: `absolute`, top: 0, left: 0 }}></div>
       
-        <h1 dangerouslySetInnerHTML={{ __html: post.title }} />
-        <PostIcons node={post} css={{ marginBottom: rhythm(1 / 2) }} />
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div {...boxedContent} css={{ display: `flex`, flexDirection: `column`, justifyContent: `center`, alignItems: `center`, marginTop: `-4em !important` }}>
+          <h1 css={{color: `rgb(133,133,133)`, textTransform: `uppercase`}} dangerouslySetInnerHTML={{ __html: post.title }} />
+          <PostIcons node={post} css={{ marginBottom: rhythm(1 / 2) }} />
+        </div>
+        <div {...boxedContent} dangerouslySetInnerHTML={{ __html: post.content }} />
         {post.acf &&
           post.acf.page_builder_post &&
           post.acf.page_builder_post.map((layout, i) => {
