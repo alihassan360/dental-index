@@ -39,7 +39,7 @@ class PostTemplate extends Component {
       
         <div {...boxedContent} css={{ display: `flex`, flexDirection: `column`, justifyContent: `center`, alignItems: `center`, marginTop: `-4em !important` }}>
           <h1 css={{color: `rgb(133,133,133)`, textTransform: `uppercase`}} dangerouslySetInnerHTML={{ __html: post.title }} />
-          <PostIcons node={post} css={{ marginBottom: rhythm(1 / 2) }} />
+          <PostIcons node={post} css={{ marginBottom: rhythm(1 / 2), textAlign: `center` }} />
         </div>
         <div {...boxedContent} dangerouslySetInnerHTML={{ __html: post.content }} />
         {post.acf &&
