@@ -1,10 +1,17 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet";
+import { css } from "glamor";
 
 import config from "../data/SiteConfig";
-
 import { rhythm } from "../utils/typography"
+
+let boxedContent = css({
+  maxWidth: 800,
+  margin: `1em auto`,
+  position: `relative`,
+  padding: `0 15px`
+})
 
 class PageTemplate extends Component {
   render() {
@@ -22,8 +29,8 @@ class PageTemplate extends Component {
           <title>{`${page.title} - ${config.siteTitle}`}</title>
           <link rel="canonical" href={`${config.siteUrl}${page.id}`} />
         </Helmet>
-        <h1 dangerouslySetInnerHTML={{ __html: currentPage.title }} />
-        <div dangerouslySetInnerHTML={{ __html: currentPage.content }} />
+        <h1 {...boxedContent} css={{ textAlign: `center` }} dangerouslySetInnerHTML={{ __html: currentPage.title }} />
+        <div {...boxedContent} dangerouslySetInnerHTML={{ __html: currentPage.content }} />
       </div>
     )
   }

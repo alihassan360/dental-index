@@ -1,12 +1,14 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import PostIcons from "../components/PostIcons"
 import Img from "gatsby-image"
-import Helmet from "react-helmet";
-import { css } from "glamor";
+import Helmet from "react-helmet"
+import { css } from "glamor"
 
 import config from "../data/SiteConfig";
 import { rhythm } from "../utils/typography"
+import Disqus from "../components/Disqus"
+import PostIcons from "../components/PostIcons"
+import PostFooter from "../components/PostFooter"
 
 let boxedContent = css({
   maxWidth: 650,
@@ -17,9 +19,29 @@ let boxedContent = css({
     width: `100%`,
     objectFit: `cover`
   },
+  '& p': {
+    padding: `0 2em`
+  },
 })
 
 class PostTemplate extends Component {
+  componentDidMount()
+  {
+    // select element to unwrap
+    var el = document.querySelector('.content-container p img');
+    if(!el)
+      return ;
+      console.log(el)
+    el = el.parentNode;
+    // get the element's parent node
+    var parent = el.parentNode;
+
+    // move all children out of the element
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+
+    // remove the empty element
+    parent.removeChild(el); 
+  }
   render() {
     const post = this.props.data.wordpressPost
     const { slug } = this.props.pathContext;
@@ -41,7 +63,7 @@ class PostTemplate extends Component {
           <h1 css={{color: `rgb(133,133,133)`, textTransform: `uppercase`}} dangerouslySetInnerHTML={{ __html: post.title }} />
           <PostIcons node={post} css={{ marginBottom: rhythm(1 / 2), textAlign: `center` }} />
         </div>
-        <div {...boxedContent} dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div {...boxedContent} className="content-container" dangerouslySetInnerHTML={{ __html: post.content }} />
         {post.acf &&
           post.acf.page_builder_post &&
           post.acf.page_builder_post.map((layout, i) => {
@@ -77,6 +99,10 @@ class PostTemplate extends Component {
             }
             return null
           })}
+          <div {...boxedContent}>
+            <PostFooter node={post} />
+            <Disqus postNode={post} />
+          </div>
       </div>
     )
   }
