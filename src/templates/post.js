@@ -122,6 +122,7 @@ export const pageQuery = graphql`
       title
       content
       ...PostIcons
+      ...PostFooter
       featured_media {
         localFile {
           childImageSharp {

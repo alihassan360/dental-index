@@ -17,7 +17,7 @@ export default ({ node, className = `` }) => (
 )
 
 export const query = graphql`
-  fragment PostIcons on wordpress__POST {
+  fragment PostFooter on wordpress__POST {
     tags {
       name
     }
