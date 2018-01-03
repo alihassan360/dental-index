@@ -9,6 +9,7 @@ import { rhythm } from "../utils/typography"
 import Disqus from "../components/Disqus"
 import PostIcons from "../components/PostIcons"
 import PostFooter from "../components/PostFooter"
+import SocialShare from "../components/SocialShare"
 
 let boxedContent = css({
   maxWidth: 650,
@@ -25,8 +26,19 @@ let boxedContent = css({
 })
 
 class PostTemplate extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mobile: true
+    };
+    this.handleResize = this.handleResize.bind(this);
+  }
+
   componentDidMount()
   {
+    this.handleResize();
+    window.addEventListener("resize", this.handleResize);
+    
     // select element to unwrap
     var el = document.querySelector('.content-container p img');
     if(!el)
@@ -42,6 +54,18 @@ class PostTemplate extends Component {
     // remove the empty element
     parent.removeChild(el); 
   }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+  }
+
+  handleResize() {
+    if (window.innerWidth >= 640) {
+      this.setState({ mobile: false });
+    } else {
+      this.setState({ mobile: true });
+    }
+  }
+
   render() {
     const post = this.props.data.wordpressPost
     const { slug } = this.props.pathContext;
@@ -101,6 +125,11 @@ class PostTemplate extends Component {
           })}
           <div {...boxedContent}>
             <PostFooter node={post} />
+            <SocialShare
+                postPath={slug}
+                postNode={post}
+                mobile={this.state.mobile}
+              />
             <Disqus postNode={post} />
           </div>
       </div>
