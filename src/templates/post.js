@@ -20,9 +20,16 @@ let boxedContent = css({
     width: `100%`,
     objectFit: `cover`
   },
-  '& p': {
+  '& p, & ol, & ul': {
     padding: `0 2em`
   },
+  '& .gallery-row': {
+    display: `inline-flex`
+  },
+  '& .tiled-gallery': {
+    display: `flex`,
+    justifyContent: `center`
+  }
 })
 
 class PostTemplate extends Component {
@@ -34,16 +41,11 @@ class PostTemplate extends Component {
     this.handleResize = this.handleResize.bind(this);
   }
 
-  componentDidMount()
-  {
-    this.handleResize();
-    window.addEventListener("resize", this.handleResize);
-    
+  unWrapNextImageIfExists(){
     // select element to unwrap
     var el = document.querySelector('.content-container p img');
     if(!el)
       return ;
-      console.log(el)
     el = el.parentNode;
     // get the element's parent node
     var parent = el.parentNode;
@@ -53,6 +55,15 @@ class PostTemplate extends Component {
 
     // remove the empty element
     parent.removeChild(el); 
+
+    this.unWrapNextImageIfExists();
+  }
+  componentDidMount()
+  {
+    this.handleResize();
+    window.addEventListener("resize", this.handleResize);
+
+    this.unWrapNextImageIfExists();
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleResize);
@@ -68,11 +79,12 @@ class PostTemplate extends Component {
 
   render() {
     const post = this.props.data.wordpressPost
-    const { slug } = this.props.pathContext;
+    const { pathId } = this.props.pathContext;
+    const { slug } = post;
     if (!post.id) {
-      post.id = slug;
+      post.id = pathId;
     }
-
+    console.log(this.props)
     return (
       <div css={{ position: `relative` }}>
         <Helmet>
@@ -80,11 +92,11 @@ class PostTemplate extends Component {
           <link rel="canonical" href={`${config.siteUrl}${post.id}`} />
         </Helmet>
         
-        <Img css={{ height: `60vh` }} sizes={post.featured_media.localFile.childImageSharp.sizes}/>
+        {post.featured_media && <Img css={{ height: `60vh` }} sizes={post.featured_media.localFile.childImageSharp.sizes}/>}
         <div css={{ background: `linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1) 95%)`, width: `100%`, height: `60vh`, position: `absolute`, top: 0, left: 0 }}></div>
       
         <div {...boxedContent} css={{ display: `flex`, flexDirection: `column`, justifyContent: `center`, alignItems: `center`, marginTop: `-4em !important` }}>
-          <h1 css={{color: `rgb(133,133,133)`, textTransform: `uppercase`}} dangerouslySetInnerHTML={{ __html: post.title }} />
+          <h1 css={{color: `rgb(133,133,133)`, textTransform: `uppercase`, textAlign: `center`}} dangerouslySetInnerHTML={{ __html: post.title }} />
           <PostIcons node={post} css={{ marginBottom: rhythm(1 / 2), textAlign: `center` }} />
         </div>
         <div {...boxedContent} className="content-container" dangerouslySetInnerHTML={{ __html: post.content }} />
@@ -149,6 +161,7 @@ export const pageQuery = graphql`
   query currentPostQuery($id: String!) {
     wordpressPost(id: { eq: $id }) {
       title
+      slug
       content
       ...PostIcons
       ...PostFooter

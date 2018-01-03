@@ -16,6 +16,9 @@ import { rhythm } from "../utils/typography"
 let card = css({
   margin: `0 auto`,
 
+  "& .link-more": {
+    display: `none`
+  },
   "@media screen and (min-width: 750px)": {
     maxWidth: 800,
   },
@@ -75,12 +78,25 @@ class Home extends Component {
             key={node.slug}
           >
             <Link to={node.slug} css={{ textDecoration: `none`, ":hover": { textDecoration: `none` } }}>
-              <Img css={{ borderRadius: `4px 4px 0 0`, maxHeight: 200 }} sizes={node.featured_media.localFile.childImageSharp.sizes} />
+              {node.featured_media && <Img css={{ borderRadius: `4px 4px 0 0`, maxHeight: 200, minHeight: 200, }} sizes={node.featured_media.localFile.childImageSharp.sizes} />}
               <div css={{ background: `linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1) 95%)`, width: `100%`, height: 200, position: `absolute`, top: 0, left: 0 }}></div>
               <h5 css={{ padding: `1em 1em 0`, marginBottom: `.8rem`, marginTop: `-2em`, color: `rgb(133,133,133)`, position: `relative` }}>{node.title}</h5>
             </Link>
             <div css={{ padding: `0 1em 0.5em` }}>
-              <div css={{ color: `rgb(180,180,180)` }} dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+              <div 
+                css={{ 
+                  color: `rgb(180,180,180)`, 
+                  display: `block`, 
+                  textOverflow: `ellipsis`, 
+                  wordWrap: `break-word`, 
+                  overflow: `hidden`, 
+                  maxHeight: 50, 
+                  marginBottom: `1.5em`, 
+                  fontSize: 14,
+                  position: `relative`,
+                }} 
+                dangerouslySetInnerHTML={{ __html: node.excerpt }} 
+              />
               <PostIcons css={{ display: `flex`, flexWrap: `wrap` }} node={node} />
             </div>
           </div>
