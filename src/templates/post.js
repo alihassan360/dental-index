@@ -101,6 +101,10 @@ class PostTemplate extends Component {
           <meta property="og:type" content="article" />
           <meta property="og:url" content={`${config.siteUrl}/${post.id}`} />
           <meta property="og:image" content={`${config.siteUrl}${post.featured_media.localFile.childImageSharp.sizes.src}`} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={`${post.title} - ${config.siteTitle}`} />
+          <meta name="twitter:description" content={`${this.removeEntities(post.excerpt)}`} />
+          <meta name="twitter:image" content={`${config.siteUrl}${post.featured_media.localFile.childImageSharp.sizes.src}`} />
         </Helmet>
         
         {post.featured_media && <Img css={{ height: `60vh` }} sizes={post.featured_media.localFile.childImageSharp.sizes}/>}

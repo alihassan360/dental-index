@@ -53,6 +53,14 @@ class Home extends Component {
           <title>{config.siteTitle}</title>
           <link rel="canonical" href={`${config.siteUrl}`} />
           <meta property="og:title" content={`${config.siteTitle}`} />
+          <meta name="description" content={`${config.siteDescription}`} />
+          <meta property="og:title" content={`${config.siteTitle}`} />
+          <meta property="og:url" content={`${config.siteUrl}`} />
+          <meta property="og:image" content={`${config.siteOgImage}`} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={`${config.siteTitle}`} />
+          <meta name="twitter:description" content={`${config.siteDescription}`} />
+          <meta name="twitter:image" content={`${config.siteOgImage}`} />
         </Helmet>
 
         {data.allWordpressPost.edges.map(({ node }) => (
