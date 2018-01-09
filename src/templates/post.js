@@ -93,16 +93,16 @@ class PostTemplate extends Component {
     return (
       <div css={{ position: `relative` }}>
         <Helmet>
-          <title>{`${post.title} - ${config.siteTitle}`}</title>
+          <title>{`${post.title} - ${this.removeEntities(config.siteTitle)}`}</title>
           <link rel="canonical" href={`${config.siteUrl}/${post.id}`} />
           <meta name="author" content={`${post.author.name}`} />
           <meta name="description" content={`${this.removeEntities(post.excerpt)}`} />
-          <meta property="og:title" content={`${post.title} - ${config.siteTitle}`} />
+          <meta property="og:title" content={`${post.title} - ${this.removeEntities(config.siteTitle)}}`} />
           <meta property="og:type" content="article" />
           <meta property="og:url" content={`${config.siteUrl}/${post.id}`} />
           <meta property="og:image" content={`${config.siteUrl}${post.featured_media.localFile.childImageSharp.sizes.src}`} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={`${post.title} - ${config.siteTitle}`} />
+          <meta name="twitter:title" content={`${post.title} - ${this.removeEntities(config.siteTitle)}`} />
           <meta name="twitter:description" content={`${this.removeEntities(post.excerpt)}`} />
           <meta name="twitter:image" content={`${config.siteUrl}${post.featured_media.localFile.childImageSharp.sizes.src}`} />
         </Helmet>
