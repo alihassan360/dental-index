@@ -52,6 +52,7 @@ class Home extends Component {
         <Helmet>
           <title>{config.siteTitle}</title>
           <link rel="canonical" href={`${config.siteUrl}`} />
+          <meta property="og:title" content={`${config.siteTitle}`} />
         </Helmet>
 
         {data.allWordpressPost.edges.map(({ node }) => (

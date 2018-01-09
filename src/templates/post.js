@@ -77,6 +77,12 @@ class PostTemplate extends Component {
     }
   }
 
+  removeEntities (str) {
+    var length = 250;
+    var str = str.substring(0, length);
+    return str.replace(/<[^>]+>/g, "").replace(/&[^;]+;/g, "");
+  }
+
   render() {
     const post = this.props.data.wordpressPost
     const { pathId } = this.props.pathContext;
@@ -89,6 +95,12 @@ class PostTemplate extends Component {
         <Helmet>
           <title>{`${post.title} - ${config.siteTitle}`}</title>
           <link rel="canonical" href={`${config.siteUrl}${post.id}`} />
+          <meta name="author" content={`${post.author.name}`} />
+          <meta name="description" content={`${this.removeEntities(post.excerpt)}`} />
+          <meta property="og:title" content={`${post.title} - ${config.siteTitle}`} />
+          <meta property="og:type" content="article" />
+          <meta property="og:url" content={`${config.siteUrl}${post.id}`} />
+          <meta property="og:image" content={`${config.siteUrl}${post.featured_media.localFile.childImageSharp.sizes.src}`} />
         </Helmet>
         
         {post.featured_media && <Img css={{ height: `60vh` }} sizes={post.featured_media.localFile.childImageSharp.sizes}/>}
@@ -162,6 +174,10 @@ export const pageQuery = graphql`
       title
       slug
       content
+      excerpt
+      author {
+        name
+      }
       ...PostIcons
       ...PostFooter
       featured_media {

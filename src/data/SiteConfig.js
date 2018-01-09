@@ -1,6 +1,6 @@
 module.exports = {
     siteTitle: "Casemasters Blog",
-    siteLogo: "https://casemastersblog.files.wordpress.com/2017/12/logo.png",
+    siteLogo: "https://casemastersblog.files.wordpress.com/2018/01/logo.png",
     siteUrl: "https://blog.casemasters.com",
     pathPrefix: "/",
     siteDescription: "Description test",
