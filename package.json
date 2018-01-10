@@ -8,6 +8,7 @@
     "gatsby": "^1.9.45",
     "gatsby-image": "^1.0.4",
     "gatsby-link": "^1.6.21",
+    "gatsby-plugin-favicon": "^2.1.1",
     "gatsby-plugin-glamor": "^1.6.7",
     "gatsby-plugin-google-tagmanager": "^1.0.12",
     "gatsby-plugin-netlify": "^1.0.12",
