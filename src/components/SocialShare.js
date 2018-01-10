@@ -16,6 +16,11 @@ const IconStyle = css({
 })
 
 class SocialLinks extends Component {
+    removeEntities (str) {
+        var length = 250;
+        var str = str.substring(0, length);
+        return str.replace(/<[^>]+>/g, "").replace(/&[^;]+;/g, " ");
+    }
   render() {
     const { postNode, postPath, mobile } = this.props;
     const post = postNode;
@@ -83,13 +88,13 @@ class SocialLinks extends Component {
                     </div>}
                 </FacebookShareCount>
             </FacebookShareButton>
-            <TwitterShareButton url={url} title={post.title}>
+            <TwitterShareButton url={url} title={`${this.removeEntities(post.title)}`}>
             <TwitterIcon round size={iconSize} />
             </TwitterShareButton>
             <LinkedinShareButton
                 url={url}
-                title={post.title}
-                description={postNode.excerpt}
+                title={`${this.removeEntities(post.title)}`}
+                description={`${this.removeEntities(postNode.excerpt)}`}
                 >
                 <LinkedinIcon round size={iconSize} />
                 <LinkedinShareCount url={url}>
