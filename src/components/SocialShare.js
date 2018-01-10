@@ -9,6 +9,9 @@ const IconStyle = css({
     marginBottom: `2em`,
     "& .SocialMediaShareButton": {
         marginRight: `1em`
+    },
+    "& .SocialMediaShareCount": {
+        textAlign: `center`,
     }
 })
 
@@ -66,9 +69,36 @@ class SocialLinks extends Component {
         Share This Article
         </div>
         <div css={{ display: `flex`, justifyContent: `center`, marginTop: `1em` }}>
+            <FacebookShareButton
+                url={url}
+                title={post.title}
+                picture={post.featured_media}
+                description={postNode.excerpt}
+                >
+                <FacebookIcon round size={iconSize} />
+                <FacebookShareCount url={url}>
+                    {count =>
+                    <div className="share-count">
+                        {filter(count)}
+                    </div>}
+                </FacebookShareCount>
+            </FacebookShareButton>
             <TwitterShareButton url={url} title={post.title}>
             <TwitterIcon round size={iconSize} />
             </TwitterShareButton>
+            <LinkedinShareButton
+                url={url}
+                title={post.title}
+                description={postNode.excerpt}
+                >
+                <LinkedinIcon round size={iconSize} />
+                <LinkedinShareCount url={url}>
+                    {count =>
+                    <div className="share-count">
+                        {filter(count)}
+                    </div>}
+                </LinkedinShareCount>
+            </LinkedinShareButton>
             <GooglePlusShareButton url={url}>
             <GooglePlusIcon round size={iconSize} />
             <GooglePlusShareCount url={url}>
@@ -78,33 +108,6 @@ class SocialLinks extends Component {
                 </div>}
             </GooglePlusShareCount>
             </GooglePlusShareButton>
-            <FacebookShareButton
-            url={url}
-            title={post.title}
-            picture={post.featured_media}
-            description={postNode.excerpt}
-            >
-            <FacebookIcon round size={iconSize} />
-            <FacebookShareCount url={url}>
-                {count =>
-                <div className="share-count">
-                    {filter(count)}
-                </div>}
-            </FacebookShareCount>
-            </FacebookShareButton>
-            <LinkedinShareButton
-            url={url}
-            title={post.title}
-            description={postNode.excerpt}
-            >
-            <LinkedinIcon round size={iconSize} />
-            <LinkedinShareCount url={url}>
-                {count =>
-                <div className="share-count">
-                    {filter(count)}
-                </div>}
-            </LinkedinShareCount>
-            </LinkedinShareButton>
         </div>
       </div>
     );

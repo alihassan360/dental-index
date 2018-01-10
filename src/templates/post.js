@@ -80,7 +80,7 @@ class PostTemplate extends Component {
   removeEntities (str) {
     var length = 250;
     var str = str.substring(0, length);
-    return str.replace(/<[^>]+>/g, "").replace(/&[^;]+;/g, "");
+    return str.replace(/<[^>]+>/g, "").replace(/&[^;]+;/g, " ");
   }
 
   render() {
@@ -93,16 +93,17 @@ class PostTemplate extends Component {
     return (
       <div css={{ position: `relative` }}>
         <Helmet>
-          <title>{`${post.title} - ${this.removeEntities(config.siteTitle)}`}</title>
+          <title>{`${this.removeEntities(post.title)} - ${config.siteTitle}`}</title>
           <link rel="canonical" href={`${config.siteUrl}/${post.id}`} />
           <meta name="author" content={`${post.author.name}`} />
           <meta name="description" content={`${this.removeEntities(post.excerpt)}`} />
-          <meta property="og:title" content={`${post.title} - ${this.removeEntities(config.siteTitle)}}`} />
+          <meta property="og:description" content={`${this.removeEntities(post.excerpt)}`} />
+          <meta property="og:title" content={`${this.removeEntities(post.title)} - ${config.siteTitle}`} />
           <meta property="og:type" content="article" />
           <meta property="og:url" content={`${config.siteUrl}/${post.id}`} />
           <meta property="og:image" content={`${config.siteUrl}${post.featured_media.localFile.childImageSharp.sizes.src}`} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={`${post.title} - ${this.removeEntities(config.siteTitle)}`} />
+          <meta name="twitter:title" content={`${this.removeEntities(post.title)} - ${config.siteTitle}`} />
           <meta name="twitter:description" content={`${this.removeEntities(post.excerpt)}`} />
           <meta name="twitter:image" content={`${config.siteUrl}${post.featured_media.localFile.childImageSharp.sizes.src}`} />
         </Helmet>
@@ -111,7 +112,7 @@ class PostTemplate extends Component {
         <div css={{ background: `linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1) 95%)`, width: `100%`, height: `60vh`, position: `absolute`, top: 0, left: 0 }}></div>
       
         <div {...boxedContent} css={{ display: `flex`, flexDirection: `column`, justifyContent: `center`, alignItems: `center`, marginTop: `-4em !important` }}>
-          <h1 css={{color: `rgb(133,133,133)`, textTransform: `uppercase`, textAlign: `center`}} dangerouslySetInnerHTML={{ __html: post.title }} />
+          <h1 css={{color: `rgb(133,133,133)`, textTransform: `uppercase`, textAlign: `center`}} dangerouslySetInnerHTML={{ __html: this.removeEntities(post.title) }} />
           <PostIcons node={post} css={{ marginBottom: rhythm(1 / 2), textAlign: `center` }} />
         </div>
         <div {...boxedContent} className="content-container" dangerouslySetInnerHTML={{ __html: post.content }} />
