@@ -22,6 +22,7 @@
     "gatsby-transformer-sharp": "^1.6.5",
     "lodash": "^4.16.4",
     "react-disqus-comments": "^1.0.3",
+    "react-hamburger-menu": "^1.0.0",
     "react-helmet": "^5.2.0",
     "react-icons": "^2.2.5",
     "react-share": "^1.19.0",

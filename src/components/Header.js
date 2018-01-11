@@ -1,6 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import Link from "gatsby-link"
+import HamburgerMenu from "react-hamburger-menu"
+import ArrowRight from "react-icons/lib/md/arrow-forward"
+
 
 import { rhythm, scale } from "../utils/typography"
 import config from "../data/SiteConfig"
@@ -10,8 +13,104 @@ const containerStyle = {
   margin: `0 auto`,
   padding: rhythm(3 / 4),
 }
+const menu = {
+    flexDirection: `row`,
+    display: `flex`,
+    "body.menu-opened &": {
+        flexDirection: `column`,
+        "@media screen and (max-width:789px)": {
+            display: "flex",
+        }
+    },
+    "@media screen and (max-width:789px)": {
+        display: "none"
+    },
+}
+
+const menuButton = {
+    "body.menu-opened &": {
+        position: `fixed`,
+        top: 10,
+        right: 10
+    },
+    "@media screen and (min-width:790px)": {
+        display: "none"
+    },
+    "@media screen and (max-width:789px)": {
+        display: "inline-flex",
+        justifyContent: "flex-end"
+    }
+}
+
+const navBar = {
+    padding: `${rhythm(0.5)} 0px`,
+    display: `flex`,
+    justifyContent: `center`,
+    "& .navBarItem": {
+        marginRight: rhythm(1),
+        ':last-child': {marginRight: 0}
+    },
+    "& .goToCM": {
+        fontSize: 14,
+        backgroundColor: `rgb(35,148,184)`,
+        color: `rgb(255,255,255)`,
+        padding: `0 0.3em 0 0.8em`,
+        borderRadius: 50,
+        justifyContent: `center`,
+        alignItems: `center`,
+        display: `flex`
+    },
+    "body.menu-opened &": {
+        backgroundColor: `white`,
+        flexDirection: `column`,
+        position: `fixed`,
+        width: `100vw`,
+        height: `100vh`,
+        top: 0,
+        zIndex: 1000,
+        "& .navBarItem": {
+            margin: `.4em 0`,
+
+        },
+        "@media screen and (max-width:789px)": {
+            "& .goToCM": {
+                justifyContent: `center`,
+                marginTop: 15
+            }
+        }
+    },
+    "@media screen and (max-width:789px)": {
+        "& .buttonWrapper": {
+            display: `flex`,
+            justifyContent: `space-between`,
+            width: `100%`,
+            padding: `0 1em`,
+            alignItems: `center`,
+            "body.menu-opened &": {
+                justifyContent: `center`
+            }
+        },
+    },
+    "@media screen and (min-width:790px)": {
+        justifyContent: `space-between`,
+        margin: `auto`,
+        maxWidth: 1200
+    }
+}
 
 class Header extends Component {
+    constructor (props){
+        super(props);
+        this.state = {open: false};
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick() {
+        this.setState({
+            open: !this.state.open
+        });
+        document.querySelector("body").className = this.state.open ? "" : "menu-opened";
+    }
     render() {
         const data = this.props.data
         return (
@@ -51,7 +150,7 @@ class Header extends Component {
                         >Casemasters Blog</span>
                         <Link
                             css={{
-                                color: `rgb(224,203,144)`
+                                color: `rgb(35,148,184)`
                             }}
                             to="/"
                         >
@@ -66,34 +165,15 @@ class Header extends Component {
                         </h1>
                     </div>
                 </div>
-                <div css={{ padding: `${rhythm(0.5)} 0px`, display: `flex`, justifyContent: `center` }}>
-                    <div css={{ marginRight: rhythm(1), ':last-child': {marginRight: 0} }}>
-                        <Link 
-                            to="/" 
-                            css={{
-                                textDecoration: `none`, 
-                                color: `rgb(133,133,133)`,
-                                "@media screen and (min-width: 500px)": {
-                                    ":hover": {
-                                        color: `rgb(35, 148, 184)`,
-                                        textDecoration: `none`,
-                                        borderBottom: `2px solid rgb(35, 148, 184)`,
-                                        padding: `${rhythm(0.55)} 0px`,
-                                    },
-                                }
-                            }}
-                        >
-                        Home
-                    </Link>
-                    </div>
-                    {data.allWordpressPage.edges.map(({ node }) => (
-                        <div css={{ marginRight: rhythm(1), ':last-child': {marginRight: 0} }} key={node.slug}>
+                <nav css={navBar}>
+                    <div css={menu}>
+                        <div className="navBarItem">
                             <Link 
-                                to={node.slug}
-                                css={{ 
+                                to="/" 
+                                css={{
                                     textDecoration: `none`, 
                                     color: `rgb(133,133,133)`,
-                                    "@media screen and (min-width: 750px)": {
+                                    "@media screen and (min-width: 500px)": {
                                         ":hover": {
                                             color: `rgb(35, 148, 184)`,
                                             textDecoration: `none`,
@@ -103,11 +183,64 @@ class Header extends Component {
                                     }
                                 }}
                             >
-                                {node.title}
+                            Home
                             </Link>
                         </div>
-                    ))}
-                </div>
+                        {data.allWordpressPage.edges.map(({ node }) => (
+                            <div className="navBarItem" key={node.slug}>
+                                <Link 
+                                    to={node.slug}
+                                    css={{ 
+                                        textDecoration: `none`, 
+                                        color: `rgb(133,133,133)`,
+                                        "@media screen and (min-width: 750px)": {
+                                            ":hover": {
+                                                color: `rgb(35, 148, 184)`,
+                                                textDecoration: `none`,
+                                                borderBottom: `2px solid rgb(35, 148, 184)`,
+                                                padding: `${rhythm(0.55)} 0px`,
+                                            },
+                                        }
+                                    }}
+                                >
+                                    {node.title}
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="buttonWrapper">
+                        <div>
+                            <a className="goToCM" href="https://www.casemasters.com">
+                            {" "}CASEMASTERS{" "}
+                            <ArrowRight 
+                                size="16" 
+                                css={{
+                                    display: `inline-flex`,
+                                    justifyContent: `center`,
+                                    alignItems: `center`,
+                                    background: `rgb(255,255,255)`,
+                                    color: `rgb(35, 148, 184)`,
+                                    borderRadius: 50,
+                                    marginLeft: 8,
+                                }} 
+                            />
+                            </a>
+                        </div>
+                        <div css={menuButton}>
+                            <HamburgerMenu
+                                isOpen={this.state.open}
+                                menuClicked={this.handleClick.bind(this)}
+                                width={18}
+                                height={15}
+                                strokeWidth={1}
+                                rotate={0}
+                                color='black'
+                                borderRadius={0}
+                                animationDuration={0.5}
+                            />
+                        </div>
+                    </div>
+                </nav>
             </header>
         );
     }
