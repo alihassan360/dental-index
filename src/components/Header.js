@@ -58,7 +58,20 @@ const navBar = {
         borderRadius: 50,
         justifyContent: `center`,
         alignItems: `center`,
-        display: `flex`
+        display: `flex`,
+        border: `1px solid rgb(35,148,184)`,
+        transition: `all .3s linear`,
+        "&:hover": {
+            textDecoration: `none`,
+            backgroundColor: `rgb(255,255,255)`,
+            color: `rgb(35,148,184)`,
+            transition: `all .3s linear`,
+            "& .arrowIcon": {
+                backgroundColor: `rgb(35,148,184)`,
+                color: `rgb(255,255,255)`,
+                transition: `all .3s linear`,
+            }
+        }
     },
     "body.menu-opened &": {
         backgroundColor: `white`,
@@ -177,8 +190,8 @@ class Header extends Component {
                                         ":hover": {
                                             color: `rgb(35, 148, 184)`,
                                             textDecoration: `none`,
-                                            borderBottom: `2px solid rgb(35, 148, 184)`,
-                                            padding: `${rhythm(0.55)} 0px`,
+                                            borderBottom: `3px solid rgb(35, 148, 184)`,
+                                            padding: `${rhythm(0.6)} 0px`,
                                         },
                                     }
                                 }}
@@ -197,8 +210,8 @@ class Header extends Component {
                                             ":hover": {
                                                 color: `rgb(35, 148, 184)`,
                                                 textDecoration: `none`,
-                                                borderBottom: `2px solid rgb(35, 148, 184)`,
-                                                padding: `${rhythm(0.55)} 0px`,
+                                                borderBottom: `3px solid rgb(35, 148, 184)`,
+                                                padding: `${rhythm(0.6)} 0px`,
                                             },
                                         }
                                     }}
@@ -214,6 +227,7 @@ class Header extends Component {
                             {" "}CASEMASTERS{" "}
                             <ArrowRight 
                                 size="16" 
+                                className="arrowIcon"
                                 css={{
                                     display: `inline-flex`,
                                     justifyContent: `center`,
@@ -222,6 +236,7 @@ class Header extends Component {
                                     color: `rgb(35, 148, 184)`,
                                     borderRadius: 50,
                                     marginLeft: 8,
+                                    transition: `all .3s linear`,
                                 }} 
                             />
                             </a>
@@ -234,7 +249,7 @@ class Header extends Component {
                                 height={15}
                                 strokeWidth={1}
                                 rotate={0}
-                                color='black'
+                                color='rgb(35, 148, 184)'
                                 borderRadius={0}
                                 animationDuration={0.5}
                             />
