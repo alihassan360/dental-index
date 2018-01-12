@@ -145,8 +145,8 @@ class Header extends Component {
                         background: `rgb(255,255,255)`,
                         padding: `${rhythm(1)} 0px`,
                         borderBottom: `1px solid rgb(240,240,240)`,
-                        "@media screen and (min-width: 500px)": {
-                        padding: `${rhythm(1)} 0px`,
+                        "@media screen and (max-width: 789px)": {
+                            padding: `0px`,
                         },
                     }}
                     >
@@ -176,7 +176,7 @@ class Header extends Component {
                         >
                             <img
                                 css={{
-                                    width: `70px`,
+                                    width: `60px`,
                                     margin: `0 auto`,
                                 }}
                                 src={config.siteLogo} alt="Casemasters" 
