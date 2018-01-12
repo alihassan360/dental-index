@@ -187,14 +187,17 @@ class Header extends Component {
                                     textDecoration: `none`, 
                                     color: `rgb(133,133,133)`,
                                     "@media screen and (min-width: 500px)": {
+                                        transition: `all .3s ease`,
                                         ":hover": {
                                             color: `rgb(35, 148, 184)`,
                                             textDecoration: `none`,
                                             borderBottom: `3px solid rgb(35, 148, 184)`,
                                             padding: `${rhythm(0.6)} 0px`,
+                                            transition: `all .3s ease`,
                                         },
                                     }
                                 }}
+                                onClick={this.handleClick.bind(this)}
                             >
                             Home
                             </Link>
@@ -207,14 +210,17 @@ class Header extends Component {
                                         textDecoration: `none`, 
                                         color: `rgb(133,133,133)`,
                                         "@media screen and (min-width: 750px)": {
+                                            transition: `all .3s ease`,
                                             ":hover": {
                                                 color: `rgb(35, 148, 184)`,
                                                 textDecoration: `none`,
                                                 borderBottom: `3px solid rgb(35, 148, 184)`,
                                                 padding: `${rhythm(0.6)} 0px`,
+                                                transition: `all .3s ease`,
                                             },
                                         }
                                     }}
+                                    onClick={this.handleClick.bind(this)}
                                 >
                                     {node.title}
                                 </Link>
@@ -224,7 +230,7 @@ class Header extends Component {
                     <div className="buttonWrapper">
                         <div>
                             <a className="goToCM" href="https://www.casemasters.com">
-                            {" "}CASEMASTERS{" "}
+                            CASEMASTERS
                             <ArrowRight 
                                 size="16" 
                                 className="arrowIcon"
