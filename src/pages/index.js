@@ -92,7 +92,7 @@ class Home extends Component {
             <Link to={node.slug} css={{ textDecoration: `none`, ":hover": { textDecoration: `none` } }}>
               {node.featured_media && <Img css={{ borderRadius: `4px 4px 0 0`, maxHeight: 200, minHeight: 200, }} sizes={node.featured_media.localFile.childImageSharp.sizes} />}
               <div css={{ background: `linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1) 95%)`, width: `100%`, height: 200, position: `absolute`, top: 0, left: 0 }}></div>
-              <h5 css={{ padding: `1em 1em 0`, marginBottom: `.8rem`, marginTop: `-2em`, color: `rgb(133,133,133)`, position: `relative` }}>{this.removeEntities(node.title)}</h5>
+              <h5 css={{ padding: `1em 1em 0`, marginBottom: `.8rem`, marginTop: `-3em`, color: `rgb(133,133,133)`, position: `relative`, lineHeight: `1.5` }}>{this.removeEntities(node.title)}</h5>
             </Link>
             <div css={{ padding: `0 1em 0.5em` }}>
               <div 

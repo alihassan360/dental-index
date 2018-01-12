@@ -30,8 +30,8 @@ const menu = {
 const menuButton = {
     "body.menu-opened &": {
         position: `fixed`,
-        top: 10,
-        right: 10
+        top: 35,
+        right: 35
     },
     "@media screen and (min-width:790px)": {
         display: "none"
