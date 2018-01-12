@@ -128,7 +128,7 @@ class Header extends Component {
         this.setState({
             open: false
         });
-        document.querySelector("body").className = this.state.open ? "menu-opened" : "";
+        document.querySelector("body").classList.remove("menu-opened");
     }
 
     render() {
