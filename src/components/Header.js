@@ -124,6 +124,13 @@ class Header extends Component {
         });
         document.querySelector("body").className = this.state.open ? "" : "menu-opened";
     }
+    handleClose(){
+        this.setState({
+            open: false
+        });
+        document.querySelector("body").className = this.state.open ? "menu-opened" : "";
+    }
+
     render() {
         const data = this.props.data
         return (
@@ -197,7 +204,7 @@ class Header extends Component {
                                         },
                                     }
                                 }}
-                                onClick={this.handleClick.bind(this)}
+                                onClick={this.handleClose.bind(this)}
                             >
                             Home
                             </Link>
@@ -220,7 +227,7 @@ class Header extends Component {
                                             },
                                         }
                                     }}
-                                    onClick={this.handleClick.bind(this)}
+                                    onClick={this.handleClose.bind(this)}
                                 >
                                     {node.title}
                                 </Link>

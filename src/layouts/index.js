@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Link from "gatsby-link"
+import { css } from 'glamor'
 
 import Header from "../components/Header"
 import { rhythm, scale } from "../utils/typography"
@@ -9,6 +10,12 @@ import config from "../data/SiteConfig"
 const containerStyle = {
   margin: `0 auto`,
 }
+
+css.global('body.menu-opened',  
+{ 
+  overflow: `hidden`, 
+  height: 0,
+})
 
 class DefaultLayout extends React.Component {
   render() {
