@@ -97,7 +97,7 @@ const navBar = {
             display: `flex`,
             justifyContent: `space-between`,
             width: `100%`,
-            padding: `0 1em`,
+            padding: `0 2em`,
             alignItems: `center`,
             "body.menu-opened &": {
                 justifyContent: `center`
