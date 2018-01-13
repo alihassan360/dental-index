@@ -38,15 +38,15 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-plugin-google-tagmanager`,
-      options: {
-        //id: "GTM-WWHPSDX",
-        // Include GTM in development.
-        // Defaults to false meaning GTM will only be loaded in production.
-        includeInDevelopment: false,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-google-tagmanager`,
+    //   options: {
+    //     //id: "GTM-WWHPSDX",
+    //     // Include GTM in development.
+    //     // Defaults to false meaning GTM will only be loaded in production.
+    //     includeInDevelopment: false,
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-favicon`,
       options: {
@@ -80,7 +80,7 @@ module.exports = {
       options: {
         headers: {
           "/*": [
-            "Cache-Control: public, max-age=360000"
+            "Cache-Control: public, max-age=3600000"
           ]
         }, // option to add more headers. `Link` headers are transformed by the below criteria
         //allPageHeaders: [], // option to add headers for all pages. `Link` headers are transformed by the below criteria
