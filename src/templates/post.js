@@ -109,7 +109,7 @@ class PostTemplate extends Component {
         </Helmet>
         
         {post.featured_media && <Img css={{ height: `60vh` }} sizes={post.featured_media.localFile.childImageSharp.sizes}/>}
-        <div css={{ background: `linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1) 95%)`, width: `100%`, height: `60vh`, position: `absolute`, top: 0, left: 0 }}></div>
+        <div css={{ background: `linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1) 95%)`, width: `100%`, height: `60vh`, position: `absolute`, top: 0, left: 0, bottom: 0 }}></div>
       
         <div {...boxedContent} css={{ display: `flex`, flexDirection: `column`, justifyContent: `center`, alignItems: `center`, marginTop: `-4em !important` }}>
           <h1 css={{color: `rgb(133,133,133)`, textTransform: `uppercase`, textAlign: `center`}} dangerouslySetInnerHTML={{ __html: this.removeEntities(post.title) }} />
