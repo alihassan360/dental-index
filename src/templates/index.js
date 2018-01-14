@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import Link from "gatsby-link";
- 
+import Helmet from "react-helmet";
+
+import config from "../data/SiteConfig";
+import PostsList from "../components/PostsList"
+
 const NavLink = props => {
-  if (!props.test) {
+  if (!props.page) {
     return <Link to={props.url}>{props.text}</Link>;
   } else {
     return <span>{props.text}</span>;
@@ -10,29 +14,42 @@ const NavLink = props => {
 };
  
 const IndexPage = ({ data, pathContext }) => {
-console.log(data, pathContext)
+
+
   const { group, index, first, last, pageCount } = pathContext;
+  const { allWordpressPost:{edges} } = data;
+  
+  let group2 = group.map(({node})=> {
+    return edges.find(edge=>edge.node.id=== node.id)
+  })
   const previousUrl = index - 1 == 1 ? "" : (index - 1).toString();
   const nextUrl = (index + 1).toString();
  
   return (
     <div>
-      <h4>{pageCount} Posts</h4>
+      <Helmet>
+          <title>{config.siteTitle}</title>
+          <link rel="canonical" href={`${config.siteUrl}`} />
+          <meta property="og:title" content={`${config.siteTitle}`} />
+          <meta name="description" content={`${config.siteDescription}`} />
+          <meta property="og:title" content={`${config.siteTitle}`} />
+          <meta property="og:url" content={`${config.siteUrl}`} />
+          <meta property="og:image" content={`${config.siteOgImage}`} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={`${config.siteTitle}`} />
+          <meta
+            name="twitter:description"
+            content={`${config.siteDescription}`}
+          />
+          <meta name="twitter:image" content={`${config.siteOgImage}`} />
+        </Helmet>
  
-      {group.map(({ node }) => (
-        <div key={node.id} className="blogListing">
-          <div className="date">{node.date}</div>
-          <Link className="blogUrl" to={node.slug}>
-            {node.title}
-          </Link>
-          <div>{node.excerpt}</div>
-        </div>
-      ))}
+      <PostsList posts={group2}/>
       <div className="previousLink">
-        <NavLink test={first} url={previousUrl} text="Go to Previous Page" />
+        {index > 1 && <NavLink page={first} url={previousUrl} text="Go to Previous Page" />}
       </div>
       <div className="nextLink">
-        <NavLink test={last} url={nextUrl} text="Go to Next Page" />
+        {last < 1 && <NavLink page={last} url={nextUrl} text="Go to Next Page" />}
       </div>
     </div>
   );
@@ -45,6 +62,7 @@ export const pageQuery = graphql`
     allWordpressPost(sort: { fields: [date], order: DESC }) {
       edges {
         node {
+          id
           title
           date(formatString: "MMM DD, YYYY")
           excerpt

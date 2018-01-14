@@ -14,6 +14,7 @@ class Post extends Component {
         return str.replace(/&[^;]+;/g, " ")
     }
     render() {
+        const node = this.props.node;
         return (
             <div 
                 css={{
