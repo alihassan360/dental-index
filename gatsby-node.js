@@ -2,6 +2,7 @@ const _ = require(`lodash`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
 const slash = require(`slash`)
+const createPaginatedPages = require("gatsby-paginate");
 
 // Implement the Gatsby API “createPages”. This is
 // called after the Gatsby bootstrap is finished so you have
@@ -87,6 +88,14 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             console.log(result.errors)
             reject(result.errors)
           }
+          createPaginatedPages({
+            edges: result.data.allWordpressPost.edges,
+            createPage: createPage,
+            pageTemplate: "./src/templates/index.js",
+            pageLength: 5, // This is optional and defaults to 10 if not used
+            pathPrefix: "", // This is optional and defaults to an empty string if not used
+            context: {} // This is optional and defaults to an empty object if not used
+          });
           const postTemplate = path.resolve(`./src/templates/post.js`)
           // We want to create a detailed page for each
           // post node. We'll just use the Wordpress Slug for the slug.

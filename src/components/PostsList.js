@@ -5,13 +5,18 @@ import ClockIcon from "react-icons/lib/md/access-time"
 import TagIcon from "react-icons/lib/md/label"
 import OpenIcon from "react-icons/lib/md/folder"
 import Img from "gatsby-image";
-import Helmet from "react-helmet";
 import { css } from "glamor";
 
-import config from "../data/SiteConfig";
 import PostIcons from "../components/PostIcons"
-
 import { rhythm } from "../utils/typography"
+
+const NavLink = props => {
+  if (!props.test) {
+    return <Link to={props.url}>{props.text}</Link>;
+  } else {
+    return <span>{props.text}</span>;
+  }
+};
 
 let card = css({
   margin: `0 auto`,
@@ -33,15 +38,17 @@ let card = css({
   }
 })
 
-class Home extends Component {
+class PostsList extends Component {
   removeEntities (str) {
     return str.replace(/&[^;]+;/g, " ")
   }
   render() {
-    const data = this.props.data
-
+    const posts = this.props.posts
+    const { group, index, first, last, pageCount } = posts.node.slug;
+    const previousUrl = index - 1 == 1 ? "" : (index - 1).toString();
+    const nextUrl = (index + 1).toString();
     return (
-      <div
+      <div 
         css={{
           display: `flex`,
           flexWrap: `wrap`,
@@ -49,21 +56,7 @@ class Home extends Component {
         }}
         {...card}
       >
-        <Helmet>
-          <title>{config.siteTitle}</title>
-          <link rel="canonical" href={`${config.siteUrl}`} />
-          <meta property="og:title" content={`${config.siteTitle}`} />
-          <meta name="description" content={`${config.siteDescription}`} />
-          <meta property="og:title" content={`${config.siteTitle}`} />
-          <meta property="og:url" content={`${config.siteUrl}`} />
-          <meta property="og:image" content={`${config.siteOgImage}`} />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={`${config.siteTitle}`} />
-          <meta name="twitter:description" content={`${config.siteDescription}`} />
-          <meta name="twitter:image" content={`${config.siteOgImage}`} />
-        </Helmet>
-
-        {data.allWordpressPost.edges.map(({ node }) => (
+        {posts.map(({ node }) => (
           <div 
             css={{
               border: `1px solid rgb(240,240,240)`,
@@ -113,39 +106,15 @@ class Home extends Component {
             </div>
           </div>
         ))}
+        <div className="previousLink">
+          <NavLink test={first} url={previousUrl} text="Go to Previous Page" />
+        </div>
+        <div className="nextLink">
+          <NavLink test={last} url={nextUrl} text="Go to Next Page" />
+        </div>
       </div>
     )
   }
 }
 
-export default Home
-
-// Set here the ID of the home page.
-export const pageQuery = graphql`
-  query homePageQuery {
-    allWordpressPost(sort: { fields: [date], order: DESC }) {
-      edges {
-        node {
-          title
-          date(formatString: "MMM DD, YYYY")
-          excerpt
-          featured_media {
-            localFile {
-              childImageSharp {
-                sizes(
-                  maxWidth: 350
-                  quality: 90
-                ) {
-                  ...GatsbyImageSharpSizes_withWebp_noBase64
-                }
-              }
-            }
-          }
-          slug
-          ...PostIcons
-          ...PostFooter
-        }
-      }
-    }
-  }
-`
+export default PostsList
