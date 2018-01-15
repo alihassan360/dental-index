@@ -4,6 +4,7 @@ import Link from "gatsby-link"
 import { css } from 'glamor'
 
 import Header from "../components/Header"
+import Footer from "../components/Footer"
 import { rhythm, scale } from "../utils/typography"
 import config from "../data/SiteConfig"
 
@@ -24,6 +25,7 @@ class DefaultLayout extends React.Component {
       <div>
         <Header data={data}/>
         <div css={containerStyle}>{this.props.children()}</div>
+        <Footer />
       </div>
     )
   }

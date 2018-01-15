@@ -108,6 +108,9 @@ const navBar = {
         justifyContent: `space-between`,
         margin: `auto`,
         maxWidth: 1200
+    },
+    "@media screen and (min-width:790px) and (max-width:1279px)": {
+        margin: `auto 2em`
     }
 }
 
@@ -167,7 +170,7 @@ class Header extends Component {
                             css={{
                                 display: `none`,
                             }}
-                        >Casemasters Blog</span>
+                        >{config.siteTitle}</span>
                         <Link
                             css={{
                                 color: `rgb(35,148,184)`

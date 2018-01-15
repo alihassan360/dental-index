@@ -38,6 +38,20 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-104291756-3",
+        // Setting this parameter is optional
+        // anonymize: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: '262866034204855',
+      },
+    },
     // {
     //   resolve: `gatsby-plugin-google-tagmanager`,
     //   options: {

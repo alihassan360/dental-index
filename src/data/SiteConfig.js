@@ -6,6 +6,6 @@ module.exports = {
     siteUrl: "https://blog.casemasters.com",
     pathPrefix: "/",
     siteDescription: "Description test",
-    copyright: "Copyright © 2018, Casemasters.",
+    copyright: "All rights reserved © 2018, Casemasters.",
     disqusShortname: "casemasters"
 };
