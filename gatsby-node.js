@@ -113,5 +113,53 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         })
       })
     // ==== END POSTS ====
+
+
+      // ==== CARTEGORIES (WORDPRESS NATIVE AND ACF) ====
+      .then(() => {
+        graphql(
+          `
+            {
+              allWordpressCategory {
+                edges {
+                  node {
+                    id
+                    slug
+                    name
+                  }
+                }
+              }
+            }
+          `
+        ).then(result => {
+          if (result.errors) {
+            console.log(result.errors)
+            reject(result.errors)
+          }
+          // createPaginatedPages({
+          //   edges: result.data.allWordpressCategory.edges,
+          //   createPage: createPage,
+          //   pageTemplate: "./src/templates/category.js",
+          //   pageLength: 6, // This is optional and defaults to 10 if not used
+          //   pathPrefix: "categories", // This is optional and defaults to an empty string if not used
+          //   context: {} // This is optional and defaults to an empty object if not used
+          // });
+          const categoryTemplate = path.resolve(`./src/templates/category.js`)
+          // We want to create a detailed page for each
+          // post node. We'll just use the Wordpress Slug for the slug.
+          // The Post ID is prefixed with 'POST_'
+          _.each(result.data.allWordpressCategory.edges, edge => {
+            createPage({
+              path: `/category/${edge.node.slug}`,
+              component: slash(categoryTemplate),
+              context: {
+                categoryId: edge.node.id,
+              },
+            })
+          })
+          resolve()
+        })
+      })
+    // ==== END CATEGORIES ====
   })
 }
