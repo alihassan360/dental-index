@@ -186,5 +186,74 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         })
       })
     // ==== END CATEGORIES ====
+
+      // ==== TAGS (WORDPRESS NATIVE AND ACF) ====
+      .then(() => {
+        graphql(
+          `
+            {
+              allWordpressTag {
+                edges {
+                  node {
+                    id
+                    slug
+                    name
+                  }
+                }
+              }
+            }
+          `
+        ).then(result => {
+          if (result.errors) {
+            console.log(result.errors)
+            reject(result.errors)
+          }
+          const tagTemplate = path.resolve(`./src/templates/tag.js`);
+          const allPosts = graphql(
+            `
+              {
+                allWordpressPost {
+                  edges {
+                    node {
+                      id
+                      slug
+                      status
+                      template
+                      format,
+                      tags {
+                        name
+                        id
+                      }
+                    }
+                  }
+                }
+              }
+            `
+          ).then(allPosts => {
+            if (result.errors) {
+              console.log(result.errors)
+              reject(result.errors)
+            }
+            _.each(result.data.allWordpressTag.edges, edge => {
+              const filteredTagPosts = allPosts.data.allWordpressPost.edges.filter(post => post.node.tags && post.node.tags.filter(tag => tag.id === edge.node.id).length > 0);
+
+              // A workaround as the pagination libraray doesn't allow passing custom context parameters currently
+              const tagPosts = filteredTagPosts.map(post => Object.assign({}, post, {currentTag: edge.node.name}));
+
+              createPaginatedPages({
+                edges: tagPosts,
+                createPage: createPage,
+                pageTemplate: tagTemplate,
+                pageLength: 6, // This is optional and defaults to 10 if not used
+                pathPrefix: `tag/${edge.node.slug}`, // This is optional and defaults to an empty string if not used
+                context: {} // This is optional and defaults to an empty object if not used
+              });
+              
+            })
+            resolve()
+          })
+        })
+      })
+    // ==== END TAGS ====
   })
 }
