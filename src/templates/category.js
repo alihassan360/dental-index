@@ -102,11 +102,11 @@ class Category extends Component {
 
         const previousUrl = categoryPath + (index - 1 == 1 ? "" : (index - 1).toString());
         const nextUrl = categoryPath + (index + 1).toString();
-
+        const categoryName = group[0] && group[0].currentCategory;
 
         return (
           <div>
-            {/* <h1 dangerouslySetInnerHTML={{ __html: categoryTitle }} /> */}
+            <h1 dangerouslySetInnerHTML={{ __html: categoryName }} />
             <PostsList posts={groupPosts} />
 
             <div {...pageNavWrapper}>
