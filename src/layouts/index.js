@@ -50,5 +50,13 @@ export const pageQuery = graphql`
         }
       }
     }
+    allWordpressCategory(sort: {fields: [count], order: DESC}) {
+      edges {
+        node {
+          name
+          slug
+        }
+      }
+    }
   }
 `
