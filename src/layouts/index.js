@@ -17,6 +17,10 @@ css.global('body.menu-opened',
   overflow: `hidden`, 
   height: 0,
 })
+css.global('a:hover',
+{
+  color: `rgb(35,148,184)`
+})
 
 class DefaultLayout extends React.Component {
   render() {

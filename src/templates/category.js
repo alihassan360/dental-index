@@ -15,6 +15,19 @@ const NavLink = props => {
   }
 };
 
+const categoryPageTitle = css({
+  "@media screen and (min-width:790px)": {
+    display: `none`
+  },
+  "@media screen and (max-width:789px)": {
+    fontSize: `18px`,
+    backgroundColor: `rgb(226, 226, 226)`,
+    textAlign: `center`,
+    color: `rgb(107, 107, 107)`,
+    padding: `1em 0`
+  }
+})
+
 const pageNavWrapper = css({
   margin: `1em auto 3em`,
   flexDirection: `columm`,
@@ -106,7 +119,7 @@ class Category extends Component {
 
         return (
           <div>
-            <h1 dangerouslySetInnerHTML={{ __html: categoryName }} />
+            <h1 {...categoryPageTitle} dangerouslySetInnerHTML={{ __html: categoryName }} />
             <PostsList posts={groupPosts} />
 
             <div {...pageNavWrapper}>
@@ -161,6 +174,9 @@ export const pageQuery = graphql`
             }
         }
       }
+    }
+    wordpressCategory {
+      name
     }
   }
 `;

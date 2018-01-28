@@ -25,6 +25,27 @@ const menu = {
     "@media screen and (max-width:789px)": {
         display: "none"
     },
+    "& .navBarItem a": {
+        textDecoration: `none`, 
+        color: `rgb(133,133,133)`,
+        "@media screen and (max-width: 789px)": {
+            "&.active": {
+                // color: `rgb(133,133,133) !important`,
+                borderBottom: `none !important`,
+                padding: `0 !important`
+            }
+        },
+        "@media screen and (min-width: 750px)": {
+            transition: `all .3s ease`,
+            ":hover": {
+                color: `rgb(35, 148, 184)`,
+                textDecoration: `none`,
+                borderBottom: `3px solid rgb(35, 148, 184)`,
+                padding: `${rhythm(0.6)} 0px`,
+                transition: `all .3s ease`,
+            },
+        }
+    }
 }
 
 const menuButton = {
@@ -194,21 +215,7 @@ class Header extends Component {
                     <div css={menu}>
                         <div className="navBarItem">
                             <Link 
-                                to="/" 
-                                css={{
-                                    textDecoration: `none`, 
-                                    color: `rgb(133,133,133)`,
-                                    "@media screen and (min-width: 500px)": {
-                                        transition: `all .3s ease`,
-                                        ":hover": {
-                                            color: `rgb(35, 148, 184)`,
-                                            textDecoration: `none`,
-                                            borderBottom: `3px solid rgb(35, 148, 184)`,
-                                            padding: `${rhythm(0.6)} 0px`,
-                                            transition: `all .3s ease`,
-                                        },
-                                    }
-                                }}
+                                to="/"
                                 onClick={this.handleClose.bind(this)}
                             >
                             Home
@@ -242,19 +249,11 @@ class Header extends Component {
                             <div className="navBarItem" key={node.slug}>
                                 <Link 
                                     to={`/category/${node.slug}`}
-                                    css={{ 
-                                        textDecoration: `none`, 
-                                        color: `rgb(133,133,133)`,
-                                        "@media screen and (min-width: 750px)": {
-                                            transition: `all .3s ease`,
-                                            ":hover": {
-                                                color: `rgb(35, 148, 184)`,
-                                                textDecoration: `none`,
-                                                borderBottom: `3px solid rgb(35, 148, 184)`,
-                                                padding: `${rhythm(0.6)} 0px`,
-                                                transition: `all .3s ease`,
-                                            },
-                                        }
+                                    activeStyle={{
+                                        color: `rgb(35, 148, 184)`,
+                                        textDecoration: `none`,
+                                        borderBottom: `3px solid rgb(35, 148, 184)`,
+                                        padding: `${rhythm(0.6)} 0px`,
                                     }}
                                     onClick={this.handleClose.bind(this)}
                                 >

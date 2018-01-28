@@ -3,6 +3,7 @@ import ClockIcon from "react-icons/lib/md/access-time"
 import TagIcon from "react-icons/lib/md/label"
 import OpenIcon from "react-icons/lib/md/folder"
 import PersonIcon from "react-icons/lib/md/person"
+import Link from "gatsby-link"
 
 import { rhythm } from "../utils/typography"
 
@@ -50,7 +51,7 @@ export default ({ node, className = `` }) => (
           }} 
         />
           {` `}
-          <span css={{ fontSize: `12px`, color: `rgb(133,133,133)`, padding: `0 4px` }}>{category.name}</span>
+          <Link to={`/category/${category.slug}`} css={{ fontSize: `12px`, color: `rgb(133,133,133)`, padding: `0 4px` }}>{category.name}</Link>
         </span>
       ))}
     {/* {node.tags &&
@@ -72,6 +73,7 @@ export const query = graphql`
     }
     categories {
       name
+      slug
     }
     author {
       name
