@@ -166,15 +166,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               reject(result.errors)
             }
             _.each(result.data.allWordpressCategory.edges, edge => {
-              // createPage({
-              //   path: `/category/${edge.node.slug}`,
-              //   component: slash(categoryTemplate),
-              //   context: {
-              //     categoryId: edge.node.id,
-              //   },
-              // })
+              const filteredCategoryPosts = allPosts.data.allWordpressPost.edges.filter(post => { return post.node.categories.filter(category => category.id === edge.node.id).length > 0});
 
-              const categoryPosts = allPosts.data.allWordpressPost.edges.filter(post => { return post.node.categories.filter(category => category.id === edge.node.id).length > 0});
+              // A workaround as the pagination libraray doesn't allow passing custom context parameters currently
+              const categoryPosts = filteredCategoryPosts.map(post => Object.assign({}, post, {currentCategory: edge.node.name}));
 
               createPaginatedPages({
                 edges: categoryPosts,
@@ -182,7 +177,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 pageTemplate: "./src/templates/category.js",
                 pageLength: 6, // This is optional and defaults to 10 if not used
                 pathPrefix: `category/${edge.node.slug}`, // This is optional and defaults to an empty string if not used
-                context: {categorySlug: edge.node.slug} // This is optional and defaults to an empty object if not used
+                context: {} // This is optional and defaults to an empty object if not used
               });
               
             })

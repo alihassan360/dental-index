@@ -90,7 +90,7 @@ const pageNavWrapper = css({
 class Category extends Component {
   render() {
         const pathContext = this.props.pathContext;
-        const categoryPath = pathContext.pathPrefix + "/";
+        const categoryPath = pathContext.pathPrefix;
         const postEdges = this.props.data.allWordpressPost.edges;
         
         const { group, index, first, last, pageCount } = pathContext;
@@ -100,13 +100,13 @@ class Category extends Component {
           return postEdges.find(edge=>edge.node.id=== node.id)
         })
 
-        const previousUrl = categoryPath + (index - 1 == 1 ? "" : (index - 1).toString());
-        const nextUrl = categoryPath + (index + 1).toString();
-
+        const previousUrl = `/${categoryPath}/${(index - 1 == 1 ? "" : index - 1)}`;
+        const nextUrl = `/${categoryPath}/${(index + 1)}`;
+        const categoryName = group[0] && group[0].currentCategory;
 
         return (
           <div>
-            {/* <h1 dangerouslySetInnerHTML={{ __html: categoryTitle }} /> */}
+            <h1 dangerouslySetInnerHTML={{ __html: categoryName }} />
             <PostsList posts={groupPosts} />
 
             <div {...pageNavWrapper}>
