@@ -15,6 +15,19 @@ const NavLink = props => {
   }
 };
 
+const tagPageTitle = css({
+  "@media screen and (min-width:790px)": {
+    display: `none`
+  },
+  "@media screen and (max-width:789px)": {
+    fontSize: `18px`,
+    backgroundColor: `rgb(226, 226, 226)`,
+    textAlign: `center`,
+    color: `rgb(107, 107, 107)`,
+    padding: `1em 0`
+  }
+})
+
 const pageNavWrapper = css({
   margin: `1em auto 3em`,
   flexDirection: `columm`,
@@ -105,7 +118,7 @@ class Tag extends Component {
 
         return (
           <div>
-            <h1 dangerouslySetInnerHTML={{ __html: tagName }} />
+            <h1 {...tagPageTitle} dangerouslySetInnerHTML={{ __html: tagName }} />
             <PostsList posts={groupPosts} />
 
             <div {...pageNavWrapper}>

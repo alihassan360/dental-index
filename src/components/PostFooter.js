@@ -1,5 +1,6 @@
 import React from "react"
 // import TagIcon from "react-icons/lib/md/label"
+import Link from "gatsby-link"
 
 import { rhythm } from "../utils/typography"
 
@@ -32,7 +33,8 @@ export default ({ node, className = `` }) => (
       }
       {node.tags &&
         node.tags.map(tag => (
-          <span 
+          <Link
+            to={`/tag/${tag.slug}`}
             css={{ 
               backgroundColor: `rgb(217,217,217)`, 
               borderRadius: 50, padding: `0.4em 1em`, 
@@ -49,7 +51,7 @@ export default ({ node, className = `` }) => (
           >
             {/* <TagIcon size={14} style={{ position: `relative`, bottom: 1 }} /> */}
             {tag.name}
-          </span>
+          </Link>
         ))}
     </div>
   </div>
@@ -59,6 +61,7 @@ export const query = graphql`
   fragment PostFooter on wordpress__POST {
     tags {
       name
+      slug
     }
   }
 `

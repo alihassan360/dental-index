@@ -75,7 +75,7 @@ const navBar = {
         fontSize: 14,
         backgroundColor: `rgb(35,148,184)`,
         color: `rgb(255,255,255)`,
-        padding: `0 0.3em 0 0.8em`,
+        padding: `0 0.3em 0 0.9em`,
         borderRadius: 50,
         justifyContent: `center`,
         alignItems: `center`,
