@@ -257,7 +257,7 @@ class Header extends Component {
                     </div>
                 </div>
                 <nav css={navBar}>
-                    <Flickity 
+                    {Flickity && <Flickity 
                         className={'navigation'}
                         elementType={'div'} // default 'div'
                         options={flickityOptions} // takes flickity options {}
@@ -314,6 +314,7 @@ class Header extends Component {
                             </div>
                         ))}
                     </Flickity>
+                    }
                     <div className="buttonWrapper">
                         <div>
                             <a className="goToCM" href="https://www.casemasters.com/?utm_source=cmblog&utm_medium=referral">
