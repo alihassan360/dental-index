@@ -28,9 +28,6 @@ const menu = {
                 content: 'flickity',
                 display: `none`
             },
-            "&:has([disabled])": {
-                justifyContent: `center`
-            }
         },
         "& .flickity-viewport": {
             width: `90%`,
@@ -201,6 +198,11 @@ class Header extends Component {
             open: false
         });
         document.querySelector("body").classList.remove("menu-opened");
+    }
+
+    componentDidMount() {
+        const isBrowser = typeof window !== 'undefined';
+        const Flickity = isBrowser ? require( 'react-flickity-component') : undefined;
     }
 
     render() {
