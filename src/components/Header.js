@@ -3,10 +3,12 @@ import PropTypes from "prop-types"
 import Link from "gatsby-link"
 import HamburgerMenu from "react-hamburger-menu"
 import ArrowRight from "react-icons/lib/md/arrow-forward"
+import Flickity from "react-flickity-component"
 
 
 import { rhythm, scale } from "../utils/typography"
 import config from "../data/SiteConfig"
+import './flickity.css'
 
 const containerStyle = {
   maxWidth: 700,
@@ -16,6 +18,37 @@ const containerStyle = {
 const menu = {
     flexDirection: `row`,
     display: `flex`,
+    position: `relative`,
+    "@media screen and (min-width: 750px)": {
+        "&.navigation": {
+            width: `100%`,
+            outline: 0,
+            margin: `-1em auto`,
+            "&:after": {
+                content: 'flickity',
+                display: `none`
+            },
+            "&:has([disabled])": {
+                justifyContent: `center`
+            }
+        },
+        "& .flickity-viewport": {
+            width: `90%`,
+            height: `50px !important`,
+            margin: `auto`,
+        },
+        "& .flickity-prev-next-button": {
+            width: 30,
+            "&[disabled]":{
+                display: `none`,
+            }
+        },
+        "& .flickity-slider": {
+            display: `flex`,
+            justifyContent: `center`,
+            alignItems: `center`
+        },
+    },
     "body.menu-opened &": {
         flexDirection: `column`,
         "@media screen and (max-width:789px)": {
@@ -67,6 +100,7 @@ const navBar = {
     padding: `${rhythm(0.5)} 0px`,
     display: `flex`,
     justifyContent: `center`,
+    alignItems: `center`,
     "& .navBarItem": {
         marginRight: rhythm(1),
         ':last-child': {marginRight: 0}
@@ -75,7 +109,7 @@ const navBar = {
         fontSize: 14,
         backgroundColor: `rgb(35,148,184)`,
         color: `rgb(255,255,255)`,
-        padding: `0 0.3em 0 0.9em`,
+        padding: `0 0.3em 0 0.8em`,
         borderRadius: 50,
         justifyContent: `center`,
         alignItems: `center`,
@@ -135,6 +169,18 @@ const navBar = {
     "@media screen and (min-width:790px) and (max-width:1279px)": {
         margin: `auto 2em`
     }
+}
+
+const flickityOptions = {
+    initialIndex: 0,
+    cellAlign: 'left',
+    contain: true,
+    pageDots: false,
+    freeScroll: true,
+    adaptiveHeight: true,
+    watchCSS: true,
+    groupCells: true,
+    groupCells: '100%'
 }
 
 class Header extends Component {
@@ -212,7 +258,14 @@ class Header extends Component {
                     </div>
                 </div>
                 <nav css={navBar}>
-                    <div css={menu}>
+                    <Flickity 
+                        className={'navigation'}
+                        elementType={'div'} // default 'div'
+                        options={flickityOptions} // takes flickity options {}
+                        disableImagesLoaded={false} // default false
+                        reloadOnUpdate // default false
+                        css={menu}
+                    >
                         <div className="navBarItem">
                             <Link 
                                 to="/"
@@ -261,10 +314,10 @@ class Header extends Component {
                                 </Link>
                             </div>
                         ))}
-                    </div>
+                    </Flickity>
                     <div className="buttonWrapper">
                         <div>
-                            <a className="goToCM" href="https://www.casemasters.com">
+                            <a className="goToCM" href="https://www.casemasters.com/?utm_source=cmblog&utm_medium=referral">
                             CASEMASTERS
                             <ArrowRight 
                                 size="16" 
