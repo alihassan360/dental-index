@@ -10,9 +10,6 @@ import { rhythm, scale } from "../utils/typography"
 import config from "../data/SiteConfig"
 import './flickity.css'
 
-const isBrowser = typeof window !== 'undefined';
-const Flickity = isBrowser ? require( 'react-flickity-component') : undefined;
-
 const containerStyle = {
   maxWidth: 700,
   margin: `0 auto`,
@@ -205,6 +202,8 @@ class Header extends Component {
 
     render() {
         const data = this.props.data
+        const isBrowser = typeof window !== 'undefined';
+        const Flickity = isBrowser ? require( 'react-flickity-component') : undefined;
         return (
             <header
                 css={{
