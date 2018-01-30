@@ -3,12 +3,15 @@ import PropTypes from "prop-types"
 import Link from "gatsby-link"
 import HamburgerMenu from "react-hamburger-menu"
 import ArrowRight from "react-icons/lib/md/arrow-forward"
-import Flickity from "react-flickity-component"
+//import Flickity from "react-flickity-component"
 
 
 import { rhythm, scale } from "../utils/typography"
 import config from "../data/SiteConfig"
 import './flickity.css'
+
+const isBrowser = typeof window !== 'undefined';
+const Flickity = isBrowser ? require( 'react-flickity-component') : undefined;
 
 const containerStyle = {
   maxWidth: 700,
@@ -198,11 +201,6 @@ class Header extends Component {
             open: false
         });
         document.querySelector("body").classList.remove("menu-opened");
-    }
-
-    componentDidMount() {
-        const isBrowser = typeof window !== 'undefined';
-        const Flickity = isBrowser ? require( 'react-flickity-component') : undefined;
     }
 
     render() {
