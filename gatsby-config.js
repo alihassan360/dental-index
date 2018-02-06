@@ -2,6 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `A sample site using gatsby-source-wordpress`,
     subtitle: `Data fetched from a site hosted on wordpress.com`,
+    siteUrl: `https://blog.casemasters.com`,
   },
   plugins: [
     // https://public-api.wordpress.com/wp/v2/sites/gatsbyjsexamplewordpress.wordpress.com/pages/
@@ -104,5 +105,8 @@ module.exports = {
         transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
       },
     },
+    {
+      resolve: `gatsby-plugin-sitemap`
+    }
   ],
 }
