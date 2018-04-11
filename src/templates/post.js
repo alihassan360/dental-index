@@ -20,8 +20,23 @@ let boxedContent = css({
     width: `100%`,
     objectFit: `cover`
   },
+  '& .tiled-gallery-item a': {
+    pointerEvents: `none`
+  },
   '& p, & ol, & ul': {
     padding: `0 2em`
+  },
+  '& figure': {
+    width:`100% !important`
+  },
+  '& figure figcaption': {
+    padding: `.5em 1em`,
+    fontStyle: `italic`,
+    color: `#444`,
+    background: `#e7e7e7`,
+    margin: `-1.9em 0 0`,
+    borderBottomLeftRadius: `4px`,
+    borderBottomRightRadius: `4px`
   },
   '& .gallery-row': {
     display: `inline-flex`
@@ -108,8 +123,8 @@ class PostTemplate extends Component {
           <meta name="twitter:image" content={`${config.siteUrl}${post.featured_media.localFile.childImageSharp.sizes.src}`} />
         </Helmet>
         
-        {post.featured_media && <Img css={{ height: `60vh` }} sizes={post.featured_media.localFile.childImageSharp.sizes}/>}
-        <div css={{ background: `linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1) 95%)`, width: `100%`, height: `60vh`, position: `absolute`, top: 0, left: 0, bottom: 0 }}></div>
+        {post.featured_media && <Img css={{ height: `65vh` }} sizes={post.featured_media.localFile.childImageSharp.sizes}/>}
+        <div css={{ background: `linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1) 95%)`, width: `100%`, height: `65vh`, position: `absolute`, top: 0, left: 0, bottom: 0 }}></div>
       
         <div {...boxedContent} css={{ display: `flex`, flexDirection: `column`, justifyContent: `center`, alignItems: `center`, marginTop: `-4em !important` }}>
           <h1 css={{color: `rgb(133,133,133)`, textTransform: `uppercase`, textAlign: `center`}} dangerouslySetInnerHTML={{ __html: this.removeEntities(post.title) }} />
