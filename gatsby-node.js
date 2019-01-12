@@ -3,7 +3,7 @@ const Promise = require(`bluebird`)
 const path = require(`path`)
 const slash = require(`slash`)
 const createPaginatedPages = require("gatsby-paginate");
-
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
 // Implement the Gatsby API “createPages”. This is
 // called after the Gatsby bootstrap is finished so you have
 // access to any information necessary to programmatically

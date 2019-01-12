@@ -253,6 +253,7 @@ class Header extends Component {
                                 }}
                                 src={config.siteLogo} alt="Casemasters" 
                             />
+                            <h3 style={{fontFamily: "Source Sans Pro", textDecoration: "none"}}>Dental Index</h3>
                         </Link>
                         </h1>
                     </div>
@@ -317,25 +318,6 @@ class Header extends Component {
                     </Flickity>
                     }
                     <div className="buttonWrapper">
-                        <div>
-                            <a className="goToCM" href="https://www.casemasters.com/?utm_source=cmblog&utm_medium=referral">
-                            CASEMASTERS
-                            <ArrowRight 
-                                size="16" 
-                                className="arrowIcon"
-                                css={{
-                                    display: `inline-flex`,
-                                    justifyContent: `center`,
-                                    alignItems: `center`,
-                                    background: `rgb(255,255,255)`,
-                                    color: `rgb(35, 148, 184)`,
-                                    borderRadius: 50,
-                                    marginLeft: 8,
-                                    transition: `all .3s linear`,
-                                }} 
-                            />
-                            </a>
-                        </div>
                         <div css={menuButton}>
                             <HamburgerMenu
                                 isOpen={this.state.open}
