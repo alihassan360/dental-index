@@ -10,7 +10,7 @@ import Disqus from "../components/Disqus";
 import PostIcons from "../components/PostIcons";
 import PostFooter from "../components/PostFooter";
 import SocialShare from "../components/SocialShare";
-
+import YouTube from "react-youtube";
 let boxedContent = css({
   maxWidth: 650,
   margin: `2em auto`,
@@ -59,10 +59,18 @@ const linkToAction = css({
   borderRadius: "8px",
   "&:hover": {
     textDecoration: "none",
-    color:"white",
+    color: "white",
     opacity: ".8"
   }
-})
+});
+const videoOptions = {
+  height: "390",
+  width: "640",
+  playerVars: {
+    // https://developers.google.com/youtube/player_parameters
+    autoplay: 1
+  }
+};
 
 class PostTemplate extends Component {
   constructor(props) {
@@ -213,7 +221,20 @@ class PostTemplate extends Component {
           className="content-container"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
-        {post.acf.link && <a {...linkToAction} className="callToAction" href={post.acf.link}>Go to link</a>}
+        {post.acf.youtubeVideo && (
+          <div css={{ display: "flex", justifyContent: "center" }}>
+            <YouTube
+              className="youtube-video"
+              videoId={post.acf.youtubeVideo}
+              opts={videoOptions}
+            />
+          </div>
+        )}
+        {post.acf.link && (
+          <a {...linkToAction} className="callToAction" href={post.acf.link}>
+            Go to link
+          </a>
+        )}
         {post.acf &&
           post.acf.page_builder_post &&
           post.acf.page_builder_post.map((layout, i) => {

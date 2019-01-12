@@ -5,7 +5,7 @@ import HamburgerMenu from "react-hamburger-menu"
 import ArrowRight from "react-icons/lib/md/arrow-forward"
 //import Flickity from "react-flickity-component"
 
-
+const types = [ "video", "webinar", "case", "article", "course" ]
 import { rhythm, scale } from "../utils/typography"
 import config from "../data/SiteConfig"
 import './flickity.css'
@@ -258,6 +258,21 @@ class Header extends Component {
                         </h1>
                     </div>
                 </div>
+                <div className="buttonWrapper">
+                        <div css={menuButton}>
+                            <HamburgerMenu
+                                isOpen={this.state.open}
+                                menuClicked={this.handleClick.bind(this)}
+                                width={18}
+                                height={15}
+                                strokeWidth={1}
+                                rotate={0}
+                                color='rgb(35, 148, 184)'
+                                borderRadius={0}
+                                animationDuration={0.5}
+                            />
+                        </div>
+                    </div>
                 <nav css={navBar}>
                     {Flickity && <Flickity 
                         className={'navigation'}
@@ -267,38 +282,35 @@ class Header extends Component {
                         reloadOnUpdate // default false
                         css={menu}
                     >
-                        <div className="navBarItem">
-                            <Link 
-                                to="/"
-                                onClick={this.handleClose.bind(this)}
-                            >
-                            Home
-                            </Link>
-                        </div>
-                        {/* {data.allWordpressPage.edges.map(({ node }) => (
-                            <div className="navBarItem" key={node.slug}>
+                        {types.map( type => (
+                            <div className="navBarItem" key={type}>
                                 <Link 
-                                    to={node.slug}
-                                    css={{ 
-                                        textDecoration: `none`, 
-                                        color: `rgb(133,133,133)`,
-                                        "@media screen and (min-width: 750px)": {
-                                            transition: `all .3s ease`,
-                                            ":hover": {
-                                                color: `rgb(35, 148, 184)`,
-                                                textDecoration: `none`,
-                                                borderBottom: `3px solid rgb(35, 148, 184)`,
-                                                padding: `${rhythm(0.6)} 0px`,
-                                                transition: `all .3s ease`,
-                                            },
-                                        }
+                                    to={`/types/${type}`}
+                                    activeStyle={{
+                                        color: `rgb(35, 148, 184)`,
+                                        textDecoration: `none`,
+                                        borderBottom: `3px solid rgb(35, 148, 184)`,
+                                        padding: `${rhythm(0.6)} 0px`,
                                     }}
                                     onClick={this.handleClose.bind(this)}
                                 >
-                                    {node.title}
+                                    {type}
                                 </Link>
                             </div>
-                        ))} */}
+                        ))}
+                    </Flickity>
+                    }
+                    
+                </nav>
+                <nav css={navBar}>
+                    {Flickity && <Flickity 
+                        className={'navigation'}
+                        elementType={'div'} // default 'div'
+                        options={flickityOptions} // takes flickity options {}
+                        disableImagesLoaded={false} // default false
+                        reloadOnUpdate // default false
+                        css={menu}
+                    >
                         {data.allWordpressCategory.edges.map(({ node }) => (
                             <div className="navBarItem" key={node.slug}>
                                 <Link 
@@ -315,23 +327,10 @@ class Header extends Component {
                                 </Link>
                             </div>
                         ))}
+                                    
                     </Flickity>
                     }
-                    <div className="buttonWrapper">
-                        <div css={menuButton}>
-                            <HamburgerMenu
-                                isOpen={this.state.open}
-                                menuClicked={this.handleClick.bind(this)}
-                                width={18}
-                                height={15}
-                                strokeWidth={1}
-                                rotate={0}
-                                color='rgb(35, 148, 184)'
-                                borderRadius={0}
-                                animationDuration={0.5}
-                            />
-                        </div>
-                    </div>
+                    
                 </nav>
             </header>
         );
