@@ -28,7 +28,7 @@ module.exports = {
         verboseOutput: false,
         // If useACF is true, then the source plugin will try to import the Wordpress ACF Plugin contents.
         // This feature is untested for sites hosted on Wordpress.com
-        useACF: false,
+        useACF: true,
         auth: { 
           // htaccess_user: "your-htaccess-username",
           // htaccess_pass: "your-htaccess-password",
